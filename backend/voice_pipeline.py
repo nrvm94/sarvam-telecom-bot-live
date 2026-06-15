@@ -13,10 +13,12 @@ Sends the same JSON message types the frontend expects:
 
 import asyncio
 import base64
+import io
 import logging
 import os
 import re
 import struct
+import wave
 
 logger = logging.getLogger(__name__)
 
@@ -32,6 +34,16 @@ def _rms(chunk: bytes) -> float:
         return 0.0
     samples = struct.unpack(f"<{n}h", chunk[: n * 2])
     return (sum(s * s for s in samples) / n) ** 0.5
+
+
+def _pcm16_to_wav(pcm_bytes: bytes, sample_rate: int = 16000) -> bytes:
+    buf = io.BytesIO()
+    with wave.open(buf, "wb") as wf:
+        wf.setnchannels(1)
+        wf.setsampwidth(2)
+        wf.setframerate(sample_rate)
+        wf.writeframes(pcm_bytes)
+    return buf.getvalue()
 
 
 async def run_voice_ws_pipeline(
@@ -121,7 +133,8 @@ async def _process(
     orchestrator,
 ) -> str:
     try:
-        transcription, lang_code = await sarvam_client.transcribe_audio(audio)
+        wav_audio = _pcm16_to_wav(audio)
+        transcription, lang_code = await sarvam_client.transcribe_audio(wav_audio)
         transcription = (transcription or "").strip()
         _bcp = {"hi-IN": "hi", "mr-IN": "mr", "en-IN": "en"}
         lang = _bcp.get(lang_code, (lang_code.split("-")[0] if lang_code else lang))
