@@ -444,7 +444,7 @@ async def ws_voice(websocket: WebSocket, call_id: str):
     await websocket.accept()
     logger.info("WebSocket connected | call_id=%s", call_id)
     try:
-        from pipecat_bot import run_voice_ws_pipeline
+        from voice_pipeline import run_voice_ws_pipeline
         await run_voice_ws_pipeline(
             websocket=websocket,
             call_id=call_id,
