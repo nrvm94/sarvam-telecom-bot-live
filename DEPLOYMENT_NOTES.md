@@ -262,9 +262,7 @@ Fix: Remove this entire block. `synthesize_speech` handles chunking internally.
 Each API call travels India→US→India (or US→India→US), adding ~300-400ms per call.
 With 3 sequential calls: easily 1-2 seconds extra vs local.
 
-**Fix options (not yet implemented):**
-- Change Railway deployment region to `ap-southeast-1` (Singapore) — closest available to India
-- Or move to a host with Mumbai/Singapore region (Render, Fly.io, AWS Mumbai)
+**Fix applied:** Changed Railway region to `ap-southeast-1` (Singapore) via Railway dashboard → Service → Settings → Region. Confirmed latency improvement.
 
 ---
 
