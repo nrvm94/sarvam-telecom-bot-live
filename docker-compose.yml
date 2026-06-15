@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  n8n:
+    image: docker.n8n.io/n8nio/n8n
+    ports:
+      - "5678:5678"
+    environment:
+      - DIALOG_API_KEY=Z47MFTHQK4QUB1O7GFMD2UOP6TPYL643
+      - FASTAPI_BACKEND_URL=http://host.docker.internal:8000
+      - DB_TYPE=sqlite
+      - N8N_USER_MANAGEMENT_DISABLED=true
+      - N8N_LISTEN_ADDRESS=0.0.0.0
+      - GENERIC_TIMEZONE=Asia/Kolkata
+      - N8N_BLOCK_ENV_ACCESS_IN_NODE=false
+    volumes:
+      - n8n_data:/home/node/.n8n
+    restart: unless-stopped
+
+volumes:
+  n8n_data:

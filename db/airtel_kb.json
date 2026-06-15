@@ -1,0 +1,167 @@
+[
+  {
+    "id": "kb_001",
+    "category": "prepaid_plans",
+    "content": "Airtel Prepaid Plan ₹199: 28 days validity, 1GB data per day (28GB total), unlimited Airtel-to-Airtel calls, 100 SMS/day. Best for light data users. Includes free Hellotunes activation."
+  },
+  {
+    "id": "kb_002",
+    "category": "prepaid_plans",
+    "content": "Airtel Prepaid Plan ₹299: 28 days validity, 2GB data per day (56GB total), unlimited calls to all networks, 100 SMS/day. Includes free subscription to Airtel Xstream mobile app."
+  },
+  {
+    "id": "kb_003",
+    "category": "prepaid_plans",
+    "content": "Airtel Prepaid Plan ₹399: 56 days validity, 2.5GB data per day (140GB total), unlimited calls to all networks, 100 SMS/day. Includes Amazon Prime Mobile subscription for 3 months."
+  },
+  {
+    "id": "kb_004",
+    "category": "prepaid_plans",
+    "content": "Airtel Prepaid Plan ₹599: 84 days validity, 2GB data per day (168GB total), unlimited calls to all networks, 100 SMS/day. Includes Disney+ Hotstar Mobile for 3 months and Wynk Music subscription."
+  },
+  {
+    "id": "kb_005",
+    "category": "postpaid_plans",
+    "content": "Airtel Postpaid Plan ₹499: 75GB data per month, unlimited calls to all Indian networks, 100 SMS/day, free Airtel Xstream Premium subscription. Ideal for individual users with moderate data needs."
+  },
+  {
+    "id": "kb_006",
+    "category": "postpaid_plans",
+    "content": "Airtel Postpaid Plan ₹799: 125GB data per month, unlimited calls, family add-on connection at ₹99/month, free Amazon Prime and Airtel Xstream Premium. Includes data rollover of up to 200GB."
+  },
+  {
+    "id": "kb_007",
+    "category": "postpaid_plans",
+    "content": "Airtel Postpaid Plan ₹999: 200GB data per month, unlimited calls, international roaming benefits on select destinations, free Netflix Basic plan, Amazon Prime, and Airtel Xstream. Data rollover up to 400GB."
+  },
+  {
+    "id": "kb_008",
+    "category": "postpaid_plans",
+    "content": "Airtel Postpaid Plan ₹1499 (Airtel Black Unlimited 5G): Unlimited 5G data, unlimited calls, international calling minutes, multiple OTT subscriptions including Netflix, Amazon Prime, Disney+ Hotstar. Priority customer support."
+  },
+  {
+    "id": "kb_009",
+    "category": "balance_check",
+    "content": "To check your Airtel balance: 1) Dial *121# from your Airtel number and select option 1. 2) Open MyAirtel app → Home screen shows balance and data remaining. 3) SMS 'BAL' to 121. 4) Call 121 and follow IVR. Balance information includes main account balance, data balance, and validity date."
+  },
+  {
+    "id": "kb_010",
+    "category": "data_usage",
+    "content": "To check Airtel data balance: 1) Dial *121*8# — instant USSD data balance. 2) MyAirtel app → Data section shows used/remaining data with daily breakdown. 3) SMS 'DATA' to 121. 4) Dial *121# → select 'Data Balance'. You will receive an SMS with your 4G/5G data status, validity, and daily consumption."
+  },
+  {
+    "id": "kb_011",
+    "category": "recharge",
+    "content": "How to recharge Airtel: 1) MyAirtel app (fastest, no extra charges). 2) Airtel website: airtel.in/recharge. 3) Paytm, Google Pay, PhonePe — select 'Mobile Recharge'. 4) Any Airtel retail store or authorized outlet. 5) Net banking or credit/debit card via airtel.in. 6) USSD: Dial *121# → Recharge. Recharge is instant for most payment methods."
+  },
+  {
+    "id": "kb_012",
+    "category": "customer_care",
+    "content": "Airtel Customer Care contacts: 1) Dial 121 (toll-free from Airtel number, 24/7). 2) Dial 98XXXXXX10 from other network numbers. 3) MyAirtel app → Help section → Chat with us. 4) Email: airtel.presence@in.airtel.com. 5) Twitter: @Airtel_Presence for quick resolution. 6) Nodal Officer: nodalofficer@in.airtel.com for unresolved complaints. Average wait time is 3-5 minutes."
+  },
+  {
+    "id": "kb_013",
+    "category": "5g_service",
+    "content": "Airtel 5G Plus is available in 100+ cities including Delhi, Mumbai, Chennai, Kolkata, Bangalore, Hyderabad, Ahmedabad, Pune, and more. To check: 1) Open MyAirtel app → Coverage Map. 2) Visit airtel.in/5g. You need a 5G-compatible phone and an Airtel 5G SIM. No extra charge for 5G — available on all postpaid plans and select prepaid packs. Speeds up to 1 Gbps in 5G zones."
+  },
+  {
+    "id": "kb_014",
+    "category": "number_portability",
+    "content": "Airtel Mobile Number Portability (MNP): SMS 'PORT <your 10-digit number>' to 1900. You will receive a Unique Porting Code (UPC) valid for 4 days. Visit nearest Airtel store with UPC, ID proof, and address proof. Process takes 7 working days. Your current number is preserved. Service continuity is maintained — outage is less than 2 hours during porting."
+  },
+  {
+    "id": "kb_015",
+    "category": "bill_payment",
+    "content": "Airtel Postpaid Bill Payment options: 1) MyAirtel app — auto-pay setup with UPI/card. 2) UPI (Google Pay, PhonePe, Paytm) — search Airtel and pay. 3) Net banking via airtel.in. 4) Credit/Debit card on website or app. 5) Airtel stores — cash or card. 6) Auto-pay: set up via MyAirtel app, deducts automatically on due date. Bill due date is 18th of each month for most accounts. Late payment charge: ₹100."
+  },
+  {
+    "id": "kb_016",
+    "category": "international_roaming",
+    "content": "Airtel International Roaming — iRoam Packs: Day pack from ₹599/day for 1GB data + unlimited calls in USA/UK/UAE. Monthly packs available for long trips. Activate via: 1) MyAirtel app → International → iRoam. 2) Call 121 before travel. 3) SMS 'ROAM' to 121. Data speeds in 150+ countries. Emergency roaming auto-activates in some countries — check with 121 before travel."
+  },
+  {
+    "id": "kb_017",
+    "category": "sim_replacement",
+    "content": "Airtel SIM Replacement / Upgrade: Visit nearest Airtel store with original ID proof (Aadhaar/PAN/Passport). SIM replacement fee: ₹25. 4G SIM upgrade from 2G/3G SIM: Free. eSIM conversion: Available for compatible devices via MyAirtel app. Processing time: 4 hours for SIM activation. For lost/stolen SIM: Call 121 immediately to block old SIM, then visit store for replacement."
+  },
+  {
+    "id": "kb_018",
+    "category": "network_issues",
+    "content": "Airtel Network Troubleshooting: 1) Restart your phone — clears most connectivity issues. 2) Check coverage: airtel.in/network-coverage or MyAirtel app → Coverage Map. 3) Toggle Airplane mode ON then OFF. 4) Check if data is enabled: Settings → Mobile Data → ON. 5) APN Settings: Reset to default (automatic). 6) If problem persists: Call 121 for network complaint — resolution in 24-48 hours. 7) Scheduled maintenance notifications via SMS."
+  },
+  {
+    "id": "kb_019",
+    "category": "airtel_black",
+    "content": "Airtel Black — Premium Family Service: Single account for multiple Airtel connections (mobile, broadband, DTH). Benefits: Single bill, single app, family data sharing, priority customer support. Plans: ₹999/month for 2 connections, ₹1499/month for 3 connections, ₹1999/month for 4+ connections. Includes OTT bundles, family safety features. Call 121 or visit airtel.in/airtel-black to enroll."
+  },
+  {
+    "id": "kb_020",
+    "category": "value_added_services",
+    "content": "Airtel Value Added Services: 1) Airtel Xstream Premium — 10,000+ movies and shows, free with ₹299+ plans. 2) Wynk Music — 60+ million songs, free with ₹399+ plans. 3) Hellotunes — custom caller tunes, ₹30/month. 4) Device protection insurance — available via MyAirtel app. 5) McAfee Security — free with select plans. To activate/deactivate: MyAirtel app → Services, or SMS to 121."
+  },
+  {
+    "id": "kb_021",
+    "category": "complaint_escalation",
+    "content": "Airtel Complaint Escalation Process: 1) First contact: Call 121 or use MyAirtel app chat — get complaint reference number. 2) If unresolved in 3 days: Email nodalofficer@in.airtel.com with complaint number. 3) Appellate Authority: Email appellate@in.airtel.com if Nodal Officer doesn't resolve in 30 days. 4) TRAI (Telecom Regulatory Authority): File complaint at trai.gov.in or call 1800-110-070. 5) Consumer Forum: If all else fails, approach consumer court with evidence."
+  },
+  {
+    "id": "kb_022",
+    "category": "airtel_thanks_app",
+    "content": "Airtel Thanks App (formerly MyAirtel): One-stop app for all Airtel services. Features: 1) Recharge prepaid or pay postpaid bill instantly. 2) Check data balance, validity, and active packs. 3) Airtel Thanks Rewards — earn points on recharges, redeem for cashback, free data, OTT subscriptions. 4) Exclusive app-only offers and bonus data. 5) Manage multiple Airtel numbers under one account. 6) Raise service requests and track complaints. 7) Buy or upgrade to higher plans. Download from Play Store or App Store, search 'Airtel Thanks'."
+  },
+  {
+    "id": "kb_023",
+    "category": "wifi_calling_volte",
+    "content": "Airtel WiFi Calling and VoLTE: WiFi Calling allows HD voice calls over WiFi when mobile signal is weak. To activate: Settings → Mobile Network → WiFi Calling → Enable. Compatible with 4G VoLTE SIM and most smartphones. VoLTE (Voice over LTE) enables HD calls over 4G network — no separate activation needed if your phone and SIM support it. Check VoLTE support: *#*#4636#*#* → Phone Information → look for VoLTE enabled. Call quality issues: Toggle WiFi Calling off/on, or call 121."
+  },
+  {
+    "id": "kb_024",
+    "category": "complaint_tracking",
+    "content": "Tracking an Airtel Complaint: After raising a complaint, you receive a reference/ticket number via SMS. To check status: 1) Airtel Thanks app → Help → My Complaints → enter ticket number. 2) Call 121 and say 'complaint status' — provide your ticket number to the agent. 3) SMS STATUS <ticket number> to 121. Resolution timelines: Network issues — 24-48 hours. Billing disputes — 3-5 working days. SIM/number issues — 24 hours. If unresolved, escalate to nodalofficer@in.airtel.com with your ticket number."
+  },
+  {
+    "id": "kb_025",
+    "category": "dnd_service",
+    "content": "Airtel DND (Do Not Disturb) Service: Block unwanted promotional calls and SMS. Activate DND: SMS START 0 to 1909 (blocks all promotional calls and SMS). Partial DND options: START 1 (banking), START 2 (real estate), START 3 (education), START 4 (health), START 5 (consumer goods), START 6 (IT/telecom), START 7 (tourism). Deactivate DND: SMS STOP to 1909. DND takes effect within 7 days of registration. Emergency and transactional messages (OTPs, bank alerts) are not blocked. Check DND status: SMS CHECK to 1909."
+  },
+  {
+    "id": "kb_026",
+    "category": "autopay_postpaid",
+    "content": "Airtel Postpaid Auto-Pay Setup: Never miss a bill payment with auto-pay. Setup via Airtel Thanks app: Go to Payments → Auto Pay → Link bank account, debit card, or UPI ID → Set payment date (recommended: 2 days before due date). Setup via net banking: Add Airtel as biller in your bank's bill payment section. Benefits: Avoid late payment charges (₹100-₹200 typically), uninterrupted service, auto-pay reminder SMS 3 days before deduction. To cancel auto-pay: Airtel Thanks app → Payments → Auto Pay → Deactivate. Minimum bill payment applies for some postpaid plans."
+  },
+  {
+    "id": "kb_027",
+    "category": "sim_block_lost",
+    "content": "Blocking Airtel SIM for Lost or Stolen Phone: Immediately call 121 and say 'block SIM' — no waiting in menu. Verification: Provide your Airtel number, registered name, and alternate contact. SIM blocked within 2 hours. Get duplicate SIM: Visit nearest Airtel store with Aadhaar + original ID proof — replacement SIM issued same day for ₹25. Same number preserved. Temporary SIM can be issued while waiting. If phone found: Visit store to unblock. Incoming calls to blocked SIM go to 'not reachable'. Activate new SIM: Insert and call 59059 from another phone."
+  },
+  {
+    "id": "kb_028",
+    "category": "call_forwarding",
+    "content": "Airtel Call Forwarding Setup: Divert incoming calls to another number. Activate unconditional forwarding (all calls): Dial **21*<number># then call. Deactivate: Dial ##21# then call. Forward when busy: Dial **67*<number># — deactivate: ##67#. Forward when unreachable: Dial **62*<number># — deactivate: ##62#. Forward when no answer: Dial **61*<number># — deactivate: ##61#. Check active forwards: Dial *#21#. Note: Call forwarding charges apply per minute as per your plan's outgoing call rate. Deactivate all: ##002# — cancels all call forwarding."
+  },
+  {
+    "id": "kb_029",
+    "category": "postpaid_to_prepaid",
+    "content": "Switching from Airtel Postpaid to Prepaid: 1) Clear all outstanding postpaid dues — check balance via Airtel Thanks app or call 121. 2) Visit nearest Airtel store with Aadhaar and original ID. 3) Submit request form for postpaid to prepaid migration. 4) Same number is retained. 5) Migration processed in 7 working days. 6) Choose prepaid plan at store or recharge after migration. Note: Any active postpaid add-ons or corporate plan connections may not transfer. Security deposit (if paid) refunded within 30 days of successful migration to your registered bank account."
+  },
+  {
+    "id": "kb_030",
+    "category": "data_addons",
+    "content": "Airtel Data Add-On Booster Packs: When daily data is exhausted, speed drops to 64 Kbps. Activate booster packs to restore full speed. Common add-ons: ₹19 — 1GB for 1 day. ₹49 — 3GB for 3 days. ₹98 — 6GB for 7 days. ₹151 — 12GB for 28 days. Activate via: Airtel Thanks app → Recharge → Data Add-On, or dial *121*2# and select add-on option, or SMS DATA to 121 for options. Add-ons are consumed after base plan data runs out. Unused add-on data does NOT roll over to next cycle."
+  },
+  {
+    "id": "kb_031",
+    "category": "night_data",
+    "content": "Airtel Night Data Packs: Extra high-speed data valid between 12 AM and 6 AM only. Options: ₹29 — 2GB night data for 28 days. ₹49 — 5GB night data for 28 days. ₹79 — 10GB night data for 28 days. Activate: Airtel Thanks app → Recharge → Night Data Pack, or dial *121*8# for night pack options. Night data does not consume daytime base plan data. Ideal for downloading large files, OTA updates, or streaming at night. Validity matches the night pack purchased. Unused night data does not carry forward."
+  },
+  {
+    "id": "kb_tech_terms",
+    "category": "telecom_terminology",
+    "content": "Airtel Telecom Technology Terms:\n5G: Fifth generation mobile network. Airtel 5G Plus offers speeds up to 1 Gbps in select cities. Available on compatible 5G smartphones.\n4G/LTE: Fourth generation network. Airtel 4G offers speeds up to 150 Mbps with nationwide coverage.\n3G: Third generation network. Being phased out in most circles.\nVoLTE (Voice over LTE): HD voice calls over 4G network. Requires VoLTE-enabled handset and Airtel 4G SIM.\nVoIP (Voice over Internet Protocol): Voice calls over internet. Used in apps like WhatsApp calls.\neSIM: Embedded SIM — a digital SIM built into the device. No physical SIM card needed. Airtel supports eSIM on compatible iPhones and Android devices.\nSIM (Subscriber Identity Module): The physical card that stores your mobile number and network credentials.\nUSSD: Unstructured Supplementary Service Data. Used for menu-based services. Example: *121# for Airtel balance check.\nAPN (Access Point Name): Network settings that allow your phone to connect to mobile internet. Airtel APN: airtelgprs.com\nIMEI (International Mobile Equipment Identity): Unique 15-digit number identifying your handset. Dial *#06# to find it.\nSMS: Short Message Service — text messages.\nMMS: Multimedia Messaging Service — picture/video messages.\nMbps: Megabits per second — internet speed unit.\nGBps/GBs: Gigabytes — data storage/usage unit.\nISD (International Subscriber Dialing): Making international calls. Prefix: 00 or +\nMNP (Mobile Number Portability): Transferring your number to another operator while keeping the same number.\nTRAI: Telecom Regulatory Authority of India — the governing body for telecom in India.\nVAS (Value Added Services): Additional services like caller tunes, data packs, international roaming.\nPUK (Personal Unblocking Key): 8-digit code to unblock a SIM after 3 wrong PIN attempts. Contact 121 to get PUK.\nDTH: Direct-to-Home satellite television service."
+  },
+  {
+    "id": "kb_ussd_codes",
+    "category": "self_service",
+    "content": "Airtel Self-Service USSD Codes and Methods:\nBalance check: Dial *121# or *123# | SMS BAL to 121 | Airtel Thanks app\nData balance: Dial *121*2# | SMS DATA to 121\nActivate/Deactivate services: Dial *121# and follow menu\nKnow your number: Dial *282#\nBlock lost SIM: Call 121 immediately and say 'block SIM'\nPUK code (blocked SIM): Call 121, verify identity, agent will provide PUK\nPort to Airtel (MNP): SMS PORT <your number> to 1900, then visit Airtel store\nActivate international roaming: Dial *124*11# or call 121\nActivate ISD calling: Contact 121 or activate via Airtel Thanks app\nRecharge: Via Airtel Thanks app, Paytm, Google Pay, PhonePe, or visit nearest Airtel retailer\nData add-on top-up: Via Airtel Thanks app or dial *121*2# and select add-on\nPostpaid bill payment: Via Airtel Thanks app, bank net banking, auto-pay, or 121"
+  }
+]
