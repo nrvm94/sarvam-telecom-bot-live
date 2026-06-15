@@ -159,16 +159,6 @@ async def _process(
 
         from agents import _voice_clean
         tts_text = _voice_clean(bot)
-        if len(tts_text) > 450:
-            parts = re.split(r"(?<=[।.!?])\s+", tts_text)
-            truncated, acc = [], 0
-            for p in parts:
-                if acc + len(p) > 450:
-                    break
-                truncated.append(p)
-                acc += len(p) + 1
-            tts_text = " ".join(truncated) if truncated else tts_text[:450]
-
         tts_lang = {"hi": "hi-IN", "mr": "mr-IN"}.get(lang, "en-IN")
         sentences = _split_sentences(tts_text)
         for i, sent in enumerate(sentences):
