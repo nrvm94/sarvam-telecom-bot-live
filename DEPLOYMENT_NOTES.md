@@ -75,7 +75,7 @@ Reason: `chroma-hnswlib==0.7.3` (chromadb 0.4.18 dep) has no Python 3.13 binary 
 | `BACKEND_URL` | `https://sarvam-telecom-bot-live-production.up.railway.app` | Railway domain |
 | `FRONTEND_URL` | `https://sarvam-telecom-bot-live-production.up.railway.app` | Same service |
 | `MOCK_SERVER_URL` | `https://sarvam-telecom-bot-live-production.up.railway.app` | Mock endpoints are built into main.py |
-| `N8N_WEBHOOK_URL` | (n8n cloud URL — set after cloud workflow is created) | Blank = escalation fails silently |
+| `N8N_WEBHOOK_URL` | `https://nrvmhdn.app.n8n.cloud/webhook/escalation` | n8n cloud production webhook |
 | `ENVIRONMENT` | `production` | |
 | `LOG_LEVEL` | `DEBUG` | |
 | `DIALOG_360_API_KEY` | `Z47MFTHQK4...` | Used by n8n, not by the app directly |
@@ -266,36 +266,51 @@ With 3 sequential calls: easily 1-2 seconds extra vs local.
 
 ---
 
-## n8n Cloud Escalation Setup (Pending)
+## n8n Cloud Escalation Setup — COMPLETE
 
-When n8n cloud workflow is created, configure 4 nodes:
+**Workflow:** `https://nrvmhdn.app.n8n.cloud` (account: nrvm94)
+**Webhook URL set in Railway:** `https://nrvmhdn.app.n8n.cloud/webhook/escalation`
+
+4-node workflow (active):
 
 1. **Webhook Trigger** — POST, path `escalation`
-   → Copy URL → set as `N8N_WEBHOOK_URL` in Railway
+   Production URL: `https://nrvmhdn.app.n8n.cloud/webhook/escalation`
 
 2. **HTTP Request — Create Ticket**
    - Method: POST
    - URL: `https://sarvam-telecom-bot-live-production.up.railway.app/mock/ticket`
-   (NOT localhost:5000 — mock endpoints are built into the FastAPI app)
+   (Mock endpoints are built into the FastAPI app — no separate mock_server.py needed)
 
 3. **HTTP Request — Send WhatsApp** (Dialog360)
    - URL: `https://waba-sandbox.360dialog.io/v1/messages`
    - Header: `D360-API-KEY: Z47MFTHQK4QUB1O7GFMD2UOP6TPYL643`
-   - Body Content Type: JSON (NOT JSON.stringify)
+   - Body Content Type: JSON (NOT JSON.stringify — n8n serialises automatically)
    ```json
    {
      "messaging_product": "whatsapp",
      "recipient_type": "individual",
      "to": "91XXXXXXXXXX",
      "type": "text",
-     "text": { "body": "={{ 'Ticket: ' + $json.ticket_id + '\\nCustomer: ' + $json.customer_name }}" }
+     "text": { "body": "={{ 'Escalation raised. Ticket: ' + $json.ticket_id }}" }
    }
    ```
    - No emojis or em-dashes in n8n expressions (cause parser errors)
+   - WhatsApp messages arrive in **Updates tab** (not main Chats tab)
+   - Dialog360 sandbox requires periodic opt-in: send any WhatsApp from `91XXXXXXXXXX` to the sandbox number shown in 360dialog dashboard
 
 4. **HTTP Request — Callback**
    - Method: POST
    - URL: `https://sarvam-telecom-bot-live-production.up.railway.app/n8n/webhook`
+   - Body:
+   ```json
+   {
+     "call_id": "={{ $('Webhook').item.json.call_id }}",
+     "ticket_id": "={{ $('Create Ticket').item.json.ticket_id }}",
+     "status": "escalated"
+   }
+   ```
+
+**For main project migration:** The n8n workflow Create Ticket URL and Callback URL must be updated to point to the new deployment domain. WhatsApp node stays the same.
 
 ---
 
@@ -316,35 +331,125 @@ git push origin rollback-branch:main --force
 
 ## Migration Plan: Applying All Changes to Main Project (`sarvam-telecom-bot`)
 
-When ready to port everything back, apply these changes in order:
+Apply these changes in order. Each step is self-contained.
 
-### Step 1 — New file: `backend/voice_pipeline.py`
+### Step 1 — Copy new file: `backend/voice_pipeline.py`
 Copy `backend/voice_pipeline.py` from live repo verbatim.
+This replaces pipecat entirely — no pipecat import, no silero, no torch.
 
-### Step 2 — Modify `backend/main.py`
-Change import line:
+### Step 2 — Modify `backend/main.py` (1 line)
 ```python
-# From:
+# Change:
 from pipecat_bot import run_voice_ws_pipeline
 # To:
 from voice_pipeline import run_voice_ws_pipeline
 ```
 
 ### Step 3 — Modify `backend/rag_engine.py`
-Replace sentence-transformers with DefaultEmbeddingFunction (see full diff above in "Files Changed" section).
+Replace the SentenceTransformer embedding with chromadb's built-in ONNX embedder.
 
-### Step 4 — Fix `backend/sarvam_client.py` `/v1` strip bug
-Change `"\v1"` to `"/v1"` in the base URL cleanup block (~line 262).
+Change imports at top:
+```python
+# Remove:
+from sentence_transformers import SentenceTransformer
+# Add:
+from chromadb.utils.embedding_functions import DefaultEmbeddingFunction
+```
 
-### Step 5 — Update `requirements.txt` / `backend/requirements.txt`
-Add `numpy<2` pin. Optionally remove `sentence-transformers` if not needed locally.
-(pipecat-ai can stay in local requirements since it works locally)
+In `__init__`, replace embed model setup:
+```python
+# Remove:
+self.embed_model = SentenceTransformer("sentence-transformers/all-MiniLM-L6-v2")
 
-### Step 6 — Add `.python-version`
-Create `.python-version` with content `3.11` in repo root (for any future Railway-like deployment).
+# Add (after chroma_client is created):
+self._ef = DefaultEmbeddingFunction()
+```
 
-### Step 7 — Verify env var
-Ensure `SARVAM_API_BASE=https://api.sarvam.ai` (no `/v1` suffix) in `.env`.
+In `get_or_create_collection` call, add embedding_function:
+```python
+self.collection = self.chroma_client.get_or_create_collection(
+    name="airtel_kb",
+    embedding_function=self._ef,      # add this line
+    metadata={"hnsw:space": "cosine"},
+)
+```
+
+In `_load_documents`, remove manual embed calls:
+```python
+# Remove these lines:
+embeddings = [self.embed_model.encode(c).tolist() for c in contents]
+# and the embeddings= kwarg in collection.add()
+
+# collection.add() becomes:
+self.collection.add(ids=ids, documents=contents, metadatas=metadatas)
+```
+
+In `query`, replace query_embeddings with query_texts:
+```python
+# Remove:
+results = self.collection.query(query_embeddings=[self.embed_model.encode(question).tolist()], ...)
+# Change to:
+results = self.collection.query(query_texts=[question], ...)
+```
+
+### Step 4 — Fix `backend/sarvam_client.py` `/v1` strip bug (~line 262)
+```python
+# Change:
+if clean.endswith("\v1"):
+# To:
+if clean.endswith("/v1"):
+```
+
+### Step 5 — Update `backend/requirements.txt`
+```
+# Remove:
+sentence-transformers==2.2.2
+pipecat-ai[silero]==0.0.51
+aiofiles==23.2.1
+
+# Change:
+pydantic==2.5.0  →  pydantic==2.9.2
+aiohttp==3.9.1   →  aiohttp
+
+# Add:
+numpy<2
+```
+
+### Step 6 — Add `.python-version` (root)
+Create file `.python-version` with content:
+```
+3.11
+```
+
+### Step 7 — Update `.env`
+```
+SARVAM_API_BASE=https://api.sarvam.ai
+```
+(Remove the `/v1` suffix if present — the code appends it per-endpoint.)
+
+### Step 8 — Update n8n local workflow (for local testing)
+The local n8n Docker workflow's "Create Ticket" node should point to `http://localhost:8000/mock/ticket`
+instead of `http://localhost:5000/...` since mock_server.py is no longer needed.
+The Callback node should point to `http://localhost:8000/n8n/webhook`.
+
+### Step 9 — Delete `backend/pipecat_bot.py`
+No longer needed. `voice_pipeline.py` replaces it entirely.
+
+---
+
+## Current Status — All Features Working
+
+| Feature | Status | Notes |
+|---------|--------|-------|
+| Voice call (STT → LLM → TTS) | Working | Hindi, English, Marathi |
+| RAG knowledge base | Working | chromadb ONNX embeddings |
+| Escalation detection | Working | "escalate" in EN/Hindi/Devanagari |
+| n8n cloud webhook | Working | `https://nrvmhdn.app.n8n.cloud/webhook/escalation` |
+| WhatsApp notification | Working | Dialog360 sandbox → Updates tab |
+| Supabase logging | Working | Env vars configured |
+| Mock downstream services | Working | Built into FastAPI at `/mock/*` |
+| Latency | Acceptable | Railway Singapore region |
+| Marathi TTS full narration | Working | 450-char truncation removed |
 
 ---
 
@@ -352,6 +457,7 @@ Ensure `SARVAM_API_BASE=https://api.sarvam.ai` (no `/v1` suffix) in `.env`.
 
 | Commit | Description |
 |--------|-------------|
+| `baeead9` | fix: remove 450-char TTS truncation; add deployment notes |
 | `dddf776` | **v1-working-baseline** — fix: wrap raw PCM16 in WAV before STT |
 | `cc3fdeb` | fix: pin numpy<2 (chromadb 0.4.18 / NumPy 2.0 incompatibility) |
 | `355576c` | fix: pin Python to 3.11 via .python-version |
@@ -360,4 +466,4 @@ Ensure `SARVAM_API_BASE=https://api.sarvam.ai` (no `/v1` suffix) in `.env`.
 
 ---
 
-*Last updated: 2026-06-15 — Status: App deployed and working. Pending: fix TTS cutoff, reduce latency, set up n8n cloud escalation.*
+*Last updated: 2026-06-15 — Status: Fully deployed and working on Railway. Next: migrate all changes to main project repo (`sarvam-telecom-bot`).*
