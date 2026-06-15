@@ -1,6 +1,6 @@
 """
 RAG Engine — Airtel Knowledge Base
-Uses ChromaDB as vector store and sentence-transformers for embeddings.
+Uses ChromaDB as vector store with its built-in ONNX embedding function.
 Documents are loaded from ../db/airtel_kb.json on first run and persisted.
 """
 
@@ -11,7 +11,7 @@ from pathlib import Path
 
 import chromadb
 from chromadb.config import Settings
-from sentence_transformers import SentenceTransformer
+from chromadb.utils.embedding_functions import DefaultEmbeddingFunction
 
 logger = logging.getLogger(__name__)
 
@@ -22,7 +22,8 @@ _KB_PATH = Path(__file__).parent.parent / "db" / "airtel_kb.json"
 class AirtelKnowledgeBase:
     """
     Manages the Airtel customer-support knowledge base using ChromaDB.
-    Embeddings are generated with a lightweight local sentence-transformer model.
+    Embeddings are generated with chromadb's DefaultEmbeddingFunction (ONNX,
+    no torch required).
     """
 
     def __init__(self):
@@ -41,14 +42,15 @@ class AirtelKnowledgeBase:
             )
         )
 
-        # ---- Embedding model ----------------------------------------------
-        logger.info("Loading embedding model: all-MiniLM-L6-v2 ...")
-        self.embed_model = SentenceTransformer("sentence-transformers/all-MiniLM-L6-v2")
-        logger.info("Embedding model loaded.")
+        # ---- Embedding function (ONNX, no torch) --------------------------
+        logger.info("Initialising embedding function (ONNX/all-MiniLM-L6-v2) ...")
+        self._ef = DefaultEmbeddingFunction()
+        logger.info("Embedding function ready.")
 
         # ---- Collection ---------------------------------------------------
         self.collection = self.chroma_client.get_or_create_collection(
             name="airtel_kb",
+            embedding_function=self._ef,
             metadata={"hnsw:space": "cosine"},
         )
         logger.info(
@@ -78,10 +80,9 @@ class AirtelKnowledgeBase:
         with open(_KB_PATH, "r", encoding="utf-8") as f:
             documents = json.load(f)
 
-        logger.info("Embedding %d knowledge-base documents ...", len(documents))
+        logger.info("Loading %d knowledge-base documents ...", len(documents))
 
         ids = []
-        embeddings = []
         metadatas = []
         contents = []
 
@@ -94,16 +95,13 @@ class AirtelKnowledgeBase:
                 logger.warning("Skipping invalid document: %s", doc)
                 continue
 
-            embedding = self.embed_model.encode(content).tolist()
-
             ids.append(doc_id)
-            embeddings.append(embedding)
             metadatas.append({"category": category, "id": doc_id})
             contents.append(content)
 
+        # chromadb calls self._ef automatically to embed contents
         self.collection.add(
             ids=ids,
-            embeddings=embeddings,
             documents=contents,
             metadatas=metadatas,
         )
@@ -132,10 +130,8 @@ class AirtelKnowledgeBase:
             logger.warning("RAG query called with empty question — returning empty context.")
             return ""
 
-        query_embedding = self.embed_model.encode(question).tolist()
-
         results = self.collection.query(
-            query_embeddings=[query_embedding],
+            query_texts=[question],
             n_results=min(top_k, self.collection.count()),
             include=["documents", "metadatas", "distances"],
         )
