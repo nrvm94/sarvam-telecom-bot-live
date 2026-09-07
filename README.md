@@ -255,8 +255,7 @@ sarvam-telecom-bot/
     ├── Sarvam_AI_Airtel_VoiceBot_Neerav_Mahadane.pdf  # Slide deck (8 slides, CXO-ready)
     ├── BUSINESS_WRITE_UP.md      # Business case write-up for Airtel CTO
     ├── ARCHITECTURE.md           # System architecture
-    ├── API_SPEC.md               # API documentation
-    └── ASSIGNMENT_BRIEF.md       # Assignment reference
+    └── API_SPEC.md               # API documentation
 ```
 
 ---
